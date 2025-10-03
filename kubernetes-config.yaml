@@ -1,0 +1,28 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: devops-deployment
+spec:
+  replicas: 3
+  selector: {matchLabels: {app: devops}}
+  template:
+    metadata: {labels: {app: devops}}
+    spec:
+      containers:
+      - name: devops-demo
+        image: devops-image:v0.2
+        ports:
+        - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: devops-deployment-lb
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 80
+    targetPort: 8080
+  selector:
+    app: devops
