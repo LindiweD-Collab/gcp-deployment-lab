@@ -1,8 +1,25 @@
 {% extends "layout.html" %}
 {% block content %}
-<div class="jumbotron">
-    <div class="container">
-        <h1>{{model.title}}</h1>
-    </div>
+
+<div class="py-5 text-center">
+    <h1 class="display-4">{{model.header}}</h1>
+    <p class="lead">{{model.description}}</p>
 </div>
+
+<div class="row">
+    {% for stage in model.pipeline_stages %}
+    <div class="col-lg-3 col-md-6 mb-4">
+        <div class="card h-100 shadow-sm border-0">
+            <div class="card-body text-center">
+                <i class="{{stage.icon}} text-primary" style="font-size: 3rem;"></i>
+                
+                <h5 class="card-title mt-3">{{stage.name}}</h5>
+                
+                <p class="card-text text-muted" style="font-size: 0.9rem;">{{stage.description}}</p>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
 {% endblock %}
